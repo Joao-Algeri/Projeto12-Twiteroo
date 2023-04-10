@@ -25,6 +25,17 @@ app.post("/tweets",(req,res)=>{
         res.send("OK")
     
 })
+app.get("/tweets",(req,res)=>{
+     
+     
+  const tweetFilter=tweets.map(tweet=>{
+    const user=users.find(person=>person.username===tweet.username)
+    return {username:tweet.username,avatar:user.avatar,tweet:tweet.tweet}
+  })
+    if(tweetFilter.length>10)return res.send(tweetFilter.slice(tweetFilter.length-10,tweetFilter.length))
+    else{res.send(tweetFilter);}
+    
+})
 const PORT=5000
 
 app.listen(PORT, () =>console.log(`servidor rodando em => ${PORT}`))
