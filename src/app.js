@@ -13,6 +13,18 @@ app.post("/sign-up",(req,res)=>{
     users.push(user);
     res.send("OK")
 })
+app.post("/tweets",(req,res)=>{
+    const tweet=req.body
+    const isLogedIn=users.find(person => person.username===tweet.username)
+    
+     if(!isLogedIn){
+       return res.send("UNAUTHORIZED")
+    }
+    
+        tweets.push(tweet);
+        res.send("OK")
+    
+})
 const PORT=5000
 
 app.listen(PORT, () =>console.log(`servidor rodando em => ${PORT}`))
